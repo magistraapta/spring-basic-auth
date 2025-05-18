@@ -29,7 +29,7 @@ public class AuthService {
 
     public Optional<User> login(User user) {
         Optional<User> existingUser = authRepository.findByUsername(user.getUsername());
-        if (existingUser == null) {
+        if (existingUser.isEmpty()) {
             throw new UsernameNotFoundException("User not found");
         }
         if (!passwordEncoder.matches(user.getPassword(), existingUser.get().getPassword())) {
